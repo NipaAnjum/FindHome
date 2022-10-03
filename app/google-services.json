@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "422819678965",
+    "project_id": "findhome-5067f",
+    "storage_bucket": "findhome-5067f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422819678965:android:25cd98a9e29e18e80913bc",
+        "android_client_info": {
+          "package_name": "com.example.findhome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422819678965-7jg90cedra1o23f3dpg95nva3e1d2pc7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ-7aRWKcACELC4UvCZdst3Xg_0Uayz9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422819678965-7jg90cedra1o23f3dpg95nva3e1d2pc7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
