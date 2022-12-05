@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.AssetDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/aimageView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/home" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:layout_editor_absoluteX="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/labelPrice"
+                        android:layout_width="60dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Price:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/aprice"
+                        android:layout_width="100dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_toEndOf="@+id/labelPrice"
+                        android:gravity="left"
+                        android:text="100000tk"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/labelLocation"
+                        android:layout_width="80dp"
+                        android:layout_height="41dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="Location:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/alocation"
+                        android:layout_width="100dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginRight="214dp"
+                        android:layout_toEndOf="@+id/labelLocation"
+                        android:gravity="left"
+                        android:text="Mirpur"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toEndOf="@+id/labelLocation"
+                        tools:layout_editor_absoluteY="223dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/labelDescription"
+                    android:layout_width="100dp"
+                    android:layout_height="41dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="Description: "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelLocation" />
+
+                <TextView
+                    android:id="@+id/adescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="left"
+                    android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelDescription" />
+
+                <TextView
+                    android:id="@+id/labelShortDesc"
+                    android:layout_width="200dp"
+                    android:layout_height="41dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="Short Description: "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                <TextView
+                    android:id="@+id/ashortDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="left"
+                    android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelShortDesc" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/labelPhone"
+                        android:layout_width="60dp"
+                        android:layout_height="41dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Phone:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/aphone"
+                        android:layout_width="150dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginRight="214dp"
+                        android:layout_toEndOf="@+id/labelPhone"
+                        android:gravity="left"
+                        android:paddingTop="16dp"
+                        android:text="01521260277"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

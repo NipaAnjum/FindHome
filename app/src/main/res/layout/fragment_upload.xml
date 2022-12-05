@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.UploadFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/give_location"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center"
+                android:hint="Enter location" />
+            <EditText
+                android:id="@+id/give_price"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:layout_below="@+id/give_location"
+                android:hint="Enter price"
+                android:background="@drawable/edit_bg"/>
+            <EditText
+                android:id="@+id/give_description"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:layout_below="@+id/give_price"
+                android:hint="Enter description"
+                android:background="@drawable/edit_bg"/>
+            <EditText
+                android:id="@+id/give_short_description"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:layout_below="@+id/give_description"
+                android:hint="Enter short description"
+                android:background="@drawable/edit_bg"/>
+
+            <EditText
+                android:id="@+id/give_contactNo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:layout_below="@+id/give_short_description"
+                android:hint="Enter Contact Number"
+                android:background="@drawable/edit_bg"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/select_image_button"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="Select image"
+                android:layout_below="@+id/give_contactNo"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_orange"
+                android:background="@drawable/edit_bg"/>
+
+            <ImageView
+                android:id="@+id/give_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@drawable/edit_bg"
+                android:src="@drawable/image"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/select_image_button"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/make_upload"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/give_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="33dp"
+                android:layout_marginEnd="88dp"
+                android:text="Upload"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/dark_orange"
+                android:background="@drawable/edit_bg" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/asset_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <ImageView
+            android:id="@+id/assetImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/image" />
+
+        <TextView
+            android:id="@+id/assetLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/assetImage"
+            android:gravity="left"
+            android:text="Location"
+            android:textSize="20sp" />
+
+<!--        <Button-->
+<!--            android:id="@+id/itemDelete"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:backgroundTint="@color/dark_orange"-->
+<!--            android:text="Delete"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:layout_marginEnd="10dp"/>-->
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

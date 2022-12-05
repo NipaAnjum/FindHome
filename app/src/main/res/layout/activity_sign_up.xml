@@ -11,7 +11,7 @@
         android:id="@+id/welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:textStyle="italic"
         android:textSize="28sp"
         android:textColor="@color/black"
         android:text="Welcome To"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/welcome"
-        android:textStyle="bold"
+        android:textStyle="italic"
         android:textSize="28sp"
         android:textColor="@color/black"
         android:text="Find Home"
@@ -107,11 +107,12 @@
                     android:background="@drawable/edit_bg"
                     android:padding="24dp"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/signup_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    app:backgroundTint="@null"
                     android:background="@drawable/button_bg"
                     android:padding="16dp"
                     android:text="Sign Up"

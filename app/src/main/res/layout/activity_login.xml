@@ -84,7 +84,7 @@
                 android:background="@drawable/edit_bg"
                 android:padding="24dp"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,6 +92,7 @@
                 android:layout_margin="16dp"
                 android:text="Login"
                 android:textAllCaps="false"
+                app:backgroundTint="@null"
                 android:background="@drawable/button_bg"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
