@@ -48,15 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference();
-//
-//        haveAccount.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-//                finish();
-//            }
-//        });
-        //NEW
+
         signUpButton.setOnClickListener(view -> {
             createUser();
         });
@@ -89,7 +81,11 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             mRef.child("users").push().setValue(user);
                             Toast.makeText(SignUpActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                         }else{
                             Toast.makeText(SignUpActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -97,56 +93,4 @@ public class SignUpActivity extends AppCompatActivity {
                 });
             }
         }
-        //NEW DONE
-
-//        signUpButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(userName.getText().toString().trim().isEmpty()){
-//                    Toast.makeText(SignUpActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
-//                }else if(userEmail.getText().toString().trim().isEmpty()){
-//                    Toast.makeText(SignUpActivity.this,"Enter valid email", Toast.LENGTH_SHORT).show();
-//                }else if(userPassword.getText().toString().trim().isEmpty()){
-//                    Toast.makeText(SignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
-//                }else if(!userPassword.getText().toString().trim().equals(confirmPassword.getText().toString().trim())){
-//                    Toast.makeText(SignUpActivity.this, "Enter valid password", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    if (emailChecker(userEmail.getText().toString().trim())){
-//                        createUser(userEmail.getText().toString().trim(),
-//                                userPassword.getText().toString().trim(),
-//                                userName.getText().toString().trim());
-//                    }else {
-//                        Toast.makeText(SignUpActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//        });
     }
-
-//    boolean emailChecker(String email){
-//        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-//    }
-
-//    void createUser(String email, String password, String name){
-//        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                User user = new User(name,email);
-//
-//                if(task.isSuccessful()){
-//                    mRef.child("users").push().setValue(user);
-//                    startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
-//                    finish();
-//
-//                    Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(SignUpActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(SignUpActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }

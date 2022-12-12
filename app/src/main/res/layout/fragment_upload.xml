@@ -17,45 +17,61 @@
                 android:id="@+id/give_location"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="50dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/edit_bg"
                 android:gravity="center"
-                android:hint="Enter location" />
+                android:hint="Enter location"
+                android:maxLength="30" />
+
             <EditText
                 android:id="@+id/give_price"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
                 android:layout_below="@+id/give_location"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center"
                 android:hint="Enter price"
-                android:background="@drawable/edit_bg"/>
+                android:inputType="number"
+                android:maxLength="9" />
+
             <EditText
                 android:id="@+id/give_description"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
+                android:layout_height="100dp"
                 android:layout_below="@+id/give_price"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center"
                 android:hint="Enter description"
-                android:background="@drawable/edit_bg"/>
+                android:maxHeight="200dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical" />
+
             <EditText
                 android:id="@+id/give_short_description"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
                 android:layout_below="@+id/give_description"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center"
                 android:hint="Enter short description"
-                android:background="@drawable/edit_bg"/>
+                android:maxLength="30"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical" />
 
             <EditText
                 android:id="@+id/give_contactNo"
@@ -65,31 +81,37 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center"
+                android:maxLength="11"
                 android:layout_below="@+id/give_short_description"
                 android:hint="Enter Contact Number"
+                android:inputType="number"
                 android:background="@drawable/edit_bg"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/select_image_button"
                 android:layout_width="150dp"
                 android:layout_height="30dp"
-                android:text="Select image"
                 android:layout_below="@+id/give_contactNo"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="16dp"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_bg"
                 android:backgroundTint="@color/dark_orange"
-                android:background="@drawable/edit_bg"/>
+                android:gravity="center"
+                android:text="Select image"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:id="@+id/give_image"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:layout_below="@+id/select_image_button"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitCenter"
+                android:padding="4dp"
                 android:background="@drawable/edit_bg"
                 android:src="@drawable/image"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_below="@+id/select_image_button"/>
+                android:visibility="gone"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/make_upload"

@@ -11,6 +11,7 @@ public class Item {
     private String image;
     private String contactNo;
     private String userId;
+    private String itemId;
 
     public Item() {
     }
@@ -38,6 +39,25 @@ public class Item {
         this.image = image;
         this.contactNo = contactNo;
         this.userId = userId;
+    }
+
+    public Item(String location, String price, String description, String shortDescription, String image, String contactNo, String userId, String itemId) {
+        this.location = location;
+        this.price = price;
+        this.description = description;
+        this.shortDescription = shortDescription;
+        this.image = image;
+        this.contactNo = contactNo;
+        this.userId = userId;
+        this.itemId = itemId;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getUserId() {

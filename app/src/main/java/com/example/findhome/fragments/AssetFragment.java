@@ -9,22 +9,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.findhome.R;
 import com.example.findhome.adapters.AssetAdapter;
-import com.example.findhome.adapters.HomeAdapter;
 import com.example.findhome.listeners.AssetListener;
 import com.example.findhome.model.Item;
 import com.example.findhome.pages.AssetDetailActivity;
-import com.example.findhome.pages.DetailsActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,15 +32,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class AssetFragment extends Fragment implements AssetListener {
 
     private RecyclerView assetRV;
+    private TextView noItemMsg;
     private List<Item> assetList;
     private AssetAdapter mAssetAdapter;
+    private String currentUser;
     private DatabaseReference ref;
     private FirebaseAuth mFirebaseAuth;
+    private int flag = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,22 +55,41 @@ public class AssetFragment extends Fragment implements AssetListener {
         super.onViewCreated(view, savedInstanceState);
 
         assetRV = view.findViewById(R.id.your_asset_RV);
+        noItemMsg = view.findViewById(R.id.noItemMsg);
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         assetList = new ArrayList<>();
+        mAssetAdapter = new AssetAdapter(getContext(), assetList, this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        assetRV.setLayoutManager(linearLayoutManager);
+        assetRV.setAdapter(mAssetAdapter);
 
-        FirebaseDatabase.getInstance().getReference().child("images")
+        FirebaseDatabase.getInstance().getReference().child("images").orderByChild("userId").equalTo(currentUser)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            assetList.add(new Item(
-                                    Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString()
-                            ));
+//                            assetList.add(new Item(
+//                                    Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
+//                                    Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
+//                                    Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
+//                                    Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
+//                                    Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
+//                                    Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString(),
+//                                    Objects.requireNonNull(dataSnapshot.child("itemId").getValue()).toString()
+//                            ));
+                            assetList.add(dataSnapshot.getValue(Item.class));
+                        }
+                        if(assetList.size()>0){
+                            noItemMsg.setVisibility(View.GONE);
+                            assetRV.setVisibility(View.VISIBLE);
+
+                        }
+                        else{
+                            noItemMsg.setVisibility(View.VISIBLE);
+                            assetRV.setVisibility(View.GONE);
                         }
                         mAssetAdapter.notifyDataSetChanged();
                     }
@@ -82,12 +99,6 @@ public class AssetFragment extends Fragment implements AssetListener {
 
                     }
                 });
-
-        mAssetAdapter = new AssetAdapter(getContext(), assetList, this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        assetRV.setLayoutManager(linearLayoutManager);
-        assetRV.setAdapter(mAssetAdapter);
     }
 
     @Override
@@ -100,6 +111,9 @@ public class AssetFragment extends Fragment implements AssetListener {
         intent.putExtra("description",assetList.get(position).getDescription());
         intent.putExtra("shortDescription",assetList.get(position).getShortDescription());
         intent.putExtra("image",assetList.get(position).getImage());
+        intent.putExtra("itemId",assetList.get(position).getItemId());
+
+        Log.d("++++++++++++", "on asset position " + assetList.get(position).getItemId());
         startActivity(intent);
     }
 }

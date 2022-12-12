@@ -30,10 +30,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -48,7 +50,8 @@ public class AccountFragment extends Fragment {
     private AppCompatButton updateButton;
     private int Pick_Image = 1, clickCount = 0;
     private Uri uri;
-    private String id;
+    private String id, userImage;
+    private long maxId;
     private DatabaseReference ref;
     private DatabaseReference reference;
     private boolean updatePerformed = false;
@@ -70,14 +73,16 @@ public class AccountFragment extends Fragment {
         updateButton = view.findViewById(R.id.update_button);
 
         ref = FirebaseDatabase.getInstance().getReference().child("users");
+
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 User user = snapshot.getValue(User.class);
                 if(user != null){
+                    userImage = user.getImage();
                     userName.setText(user.getName());
                     userEmail.setText(user.getEmail());
-                    id = snapshot.getKey();
+                    id =  snapshot.getKey();
                     Glide.with(getContext())
                             .load(user.getImage())
                             .centerCrop()
@@ -121,8 +126,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(clickCount==0){
-                uploadImage();
-                clickCount += 1;
+                    uploadImage();
+                    clickCount += 1;
                 }else{
                     Toast.makeText(getContext(), "Wait for the response", Toast.LENGTH_SHORT).show();
                 }
@@ -138,50 +143,99 @@ public class AccountFragment extends Fragment {
             assert data != null;
             if(data.getData() != null){
                 uri = data.getData();
+                Log.d("-----------------", " the uri" + uri);
                 userProfile.setImageURI(uri);
             }
         }
     }
 
     private void uploadImage() {
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/"+ UUID.randomUUID().toString());
-        ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        updatePerformed = true;
-                        Log.d("URL", "onSuccess: "+uri);
+        if(uri != null) {
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + UUID.randomUUID().toString());
+            ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            updatePerformed = true;
+                            Log.d("URL", "onSuccess: " + uri);
 
-                        Map<String,String> map = new HashMap<>();
-                        map.put("name", userName.getText().toString());
-                        map.put("email", userEmail.getText().toString());
-                        if(uri != null){
-                            map.put("image",uri.toString());
-                        }
+                            Map<String, String> map = new HashMap<>();
+                            User u = new User();
 
-                        reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);
-                        reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                FirebaseAuth.getInstance().getCurrentUser()
-                                        .updateEmail(userEmail.getText().toString().trim())
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isComplete()){
-                                                    Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-                                                }else{
-                                                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                            if (userName.getText().toString() == null) {
+                                String n = u.getName();
+                                map.put("name", n);
+                            } else map.put("name", userName.getText().toString());
+                            if (userEmail.getText().toString() == null) {
+                                String e = u.getEmail();
+                                map.put("email", e);
+                            } else map.put("email", userEmail.getText().toString());
+                            if (uri != null) {
+                                map.put("image", uri.toString());
                             }
-                        });
-                    }
-                });
-            }
-        });
+//                        else{
+//                            String i = u.getImage();
+//                            map.put("image", i);
+//                        }
+
+                            reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);
+                            reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    FirebaseAuth.getInstance().getCurrentUser()
+                                            .updateEmail(userEmail.getText().toString().trim())
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isComplete()) {
+                                                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        else{
+            Map<String, String> map = new HashMap<>();
+            User u = new User();
+
+            if (userName.getText().toString() == null) {
+                String n = u.getName();
+                map.put("name", n);
+            } else map.put("name", userName.getText().toString());
+            if (userEmail.getText().toString() == null) {
+                String e = u.getEmail();
+                map.put("email", e);
+            } else map.put("email", userEmail.getText().toString());
+
+            map.put("image", userImage);
+
+            reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);
+            reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    FirebaseAuth.getInstance().getCurrentUser()
+                            .updateEmail(userEmail.getText().toString().trim())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isComplete()) {
+                                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+            });
+        }
     }
 }

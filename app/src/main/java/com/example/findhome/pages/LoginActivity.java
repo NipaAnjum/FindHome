@@ -42,14 +42,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-//        createAccount.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-//            }
-//        });
         createAccount.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
 
         loginButton.setOnClickListener(view -> {
@@ -73,7 +71,11 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }else{
                         Toast.makeText(LoginActivity.this, "Log in Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -83,45 +85,3 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
-
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(!email.getText().toString().trim().isEmpty() && emailChecker(email.getText().toString().trim())){
-//                    if(!password.getText().toString().isEmpty()){
-//                        loginUser(email.getText().toString().trim(), password.getText().toString().trim());
-//                    }else{
-//                        Toast.makeText(LoginActivity.this, "Enter valid password", Toast.LENGTH_SHORT).show();
-//                    }
-//                }else{
-//                    Toast.makeText(LoginActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        }
-//
-//    boolean emailChecker(String email){
-//        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-//    }
-//
-//    void loginUser(String email, String password){
-//        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if(task.isSuccessful()){
-//                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-//                    finish();
-//                }else{
-//                    Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
-//}

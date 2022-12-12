@@ -2,6 +2,7 @@ package com.example.findhome.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,14 +23,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.findhome.R;
-import com.example.findhome.model.User;
+import com.example.findhome.pages.HomeActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -76,6 +76,7 @@ public class UploadFragment extends Fragment {
         if(currentUser != null){
             userID = currentUser.getUid();
         }
+
         root = FirebaseDatabase.getInstance().getReference().child("images");
         select_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,11 +91,18 @@ public class UploadFragment extends Fragment {
         upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(clickCount==0) {
-                    uploadImage();
-                    clickCount += 1;
+                if(location.getText().toString() == null || price.getText().toString() == null || description.getText().toString() == null
+                        || shortDescription.getText().toString() == null || contact.getText().toString() == null || userID == null ||
+                        id == null || uri  == null) {
+                    Toast.makeText(getActivity(), "All Information is required", Toast.LENGTH_SHORT).show();
                 }
-                else Toast.makeText(getContext(), "Wait for the response", Toast.LENGTH_SHORT).show();
+                else{
+                    if(clickCount==0) {
+                        uploadItem();
+                        clickCount += 1;
+                    }
+                    else Toast.makeText(getContext(), "Wait for the response", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -108,11 +116,12 @@ public class UploadFragment extends Fragment {
             if(data.getData() != null){
                 uri = data.getData();
                 itemImage.setImageURI(uri);
+                itemImage.setVisibility(View.VISIBLE);
             }
         }
     }
 
-    private void uploadImage() {
+    private void uploadItem() {
         StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/"+ UUID.randomUUID().toString());
         ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
               @Override
@@ -124,31 +133,36 @@ public class UploadFragment extends Fragment {
                         Log.d("URL", "onSuccess: "+uri);
 
                         id = root.push().getKey();
+                        Log.d("------------------", "item is in upload fragment " + id);
 
                         Map<String,String> map = new HashMap<>();
 
-                        map.put("location", location.getText().toString());
-                        map.put("price", price.getText().toString());
-                        map.put("description", description.getText().toString());
-                        map.put("shortDescription", shortDescription.getText().toString());
-                        map.put("contactNo", contact.getText().toString());
-                        map.put("userId", userID);
-                        if(uri != null){
-                            map.put("image",uri.toString());
-                        }
+
+                            map.put("location", location.getText().toString());
+                            map.put("price", price.getText().toString());
+                            map.put("description", description.getText().toString());
+                            map.put("shortDescription", shortDescription.getText().toString());
+                            map.put("contactNo", contact.getText().toString());
+                            map.put("userId", userID);
+                            map.put("itemId",id);
+//                            if(uri != null){
+                                map.put("image",uri.toString());
+//                            }
 
                         reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
                         reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
-                                Intent intent = new Intent(getContext(), AssetFragment.class);
-                                intent.putExtra("location",location.getText().toString());
-                                intent.putExtra("image", uri.toString());
-                                intent.putExtra("userId", userID.toString());
-                                startActivity(intent);
+//                                Fragment fragment = new AssetFragment();
+//                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                                fragmentTransaction.replace(R.id.fragment_container, fragment);
+//                                fragmentTransaction.addToBackStack(null);
+//                                fragmentTransaction.commit();
 
                                 Toast.makeText(getContext(), "New Item Uploaded", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getActivity(), HomeActivity.class));
+                                ((Activity) getActivity()).overridePendingTransition(0,0);
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {

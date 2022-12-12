@@ -2,6 +2,7 @@ package com.example.findhome.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.example.findhome.listeners.AssetListener;
 import com.example.findhome.listeners.ItemListener;
 import com.example.findhome.model.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssetAdapter extends RecyclerView.Adapter<AssetAdapter.ViewHolder> {
