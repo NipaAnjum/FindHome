@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,6 +55,8 @@ public class AccountFragment extends Fragment {
     private long maxId;
     private DatabaseReference ref;
     private DatabaseReference reference;
+    private FirebaseUser currUser;
+    private String currUEmail;
     private boolean updatePerformed = false;
 
     @Override
@@ -74,35 +77,26 @@ public class AccountFragment extends Fragment {
 
         ref = FirebaseDatabase.getInstance().getReference().child("users");
 
-        ref.addChildEventListener(new ChildEventListener() {
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
+        currUEmail = currUser.getEmail();
+
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                User user = snapshot.getValue(User.class);
-                if(user != null){
-                    userImage = user.getImage();
-                    userName.setText(user.getName());
-                    userEmail.setText(user.getEmail());
-                    id =  snapshot.getKey();
-                    Glide.with(getContext())
-                            .load(user.getImage())
-                            .centerCrop()
-                            .placeholder(R.drawable.ic_account)
-                            .into(userProfile);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    String e = ds.child("email").getValue().toString();
+                    if(e.equals(currUEmail)) {
+                        id = ds.getKey();
+                        userImage = ds.child("image").getValue().toString();
+                        userName.setText(ds.child("name").getValue().toString());
+                        userEmail.setText(ds.child("email").getValue().toString());
+                        Glide.with(getContext())
+                                .load(ds.child("image").getValue().toString())
+                                .centerCrop()
+                                .placeholder(R.drawable.ic_account)
+                                .into(userProfile);
+                    }
                 }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
 
@@ -111,6 +105,44 @@ public class AccountFragment extends Fragment {
 
             }
         });
+
+//        ref.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                User user = snapshot.getValue(User.class);
+//                if(user != null){
+//                    userImage = user.getImage();
+//                    id =  snapshot.getKey();
+//                    userName.setText(user.getName());
+//                    userEmail.setText(user.getEmail());
+//                    Glide.with(getContext())
+//                            .load(user.getImage())
+//                            .centerCrop()
+//                            .placeholder(R.drawable.ic_account)
+//                            .into(userProfile);
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +248,7 @@ public class AccountFragment extends Fragment {
                 map.put("email", e);
             } else map.put("email", userEmail.getText().toString());
 
+            userImage = u.getImage();
             map.put("image", userImage);
 
             reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);

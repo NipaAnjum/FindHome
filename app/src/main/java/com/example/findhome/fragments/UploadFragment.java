@@ -46,7 +46,7 @@ public class UploadFragment extends Fragment {
     private int Pick_Image = 1;
     private int clickCount = 0;
     private Uri uri;
-    private String id, userID;
+    private String id, userID, assetStatus = "review";
     private FirebaseUser currentUser;
     private DatabaseReference ref, userDB;
     private DatabaseReference reference, root;
@@ -92,8 +92,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(location.getText().toString() == null || price.getText().toString() == null || description.getText().toString() == null
-                        || shortDescription.getText().toString() == null || contact.getText().toString() == null || userID == null ||
-                        id == null || uri  == null) {
+                        || shortDescription.getText().toString() == null || contact.getText().toString() == null || uri  == null) {
                     Toast.makeText(getActivity(), "All Information is required", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -133,7 +132,7 @@ public class UploadFragment extends Fragment {
                         Log.d("URL", "onSuccess: "+uri);
 
                         id = root.push().getKey();
-                        Log.d("------------------", "item is in upload fragment " + id);
+//                        Log.d("------------------", "item is in upload fragment " + id);
 
                         Map<String,String> map = new HashMap<>();
 
@@ -145,9 +144,8 @@ public class UploadFragment extends Fragment {
                             map.put("contactNo", contact.getText().toString());
                             map.put("userId", userID);
                             map.put("itemId",id);
-//                            if(uri != null){
-                                map.put("image",uri.toString());
-//                            }
+                            map.put("image",uri.toString());
+                            map.put("status", assetStatus);
 
                         reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
                         reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {

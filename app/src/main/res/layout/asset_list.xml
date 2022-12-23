@@ -11,6 +11,7 @@
         android:id="@+id/asset_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/light_grey"
         android:padding="2dp">
 
         <ImageView
@@ -32,6 +33,36 @@
             android:gravity="left"
             android:text="Location"
             android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/pending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pending"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/approved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/approved"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/refused"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/refuse"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
 
 <!--        <Button-->
 <!--            android:id="@+id/itemDelete"-->

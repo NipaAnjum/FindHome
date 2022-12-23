@@ -12,6 +12,7 @@ public class Item {
     private String contactNo;
     private String userId;
     private String itemId;
+    private String status;
 
     public Item() {
     }
@@ -21,6 +22,7 @@ public class Item {
         this.price = price;
         this.shortDescription = shortDescription;
     }
+
 
     public Item(String location, String price, String description, String shortDescription, String image, String contactNo) {
         this.location = location;
@@ -50,6 +52,26 @@ public class Item {
         this.contactNo = contactNo;
         this.userId = userId;
         this.itemId = itemId;
+    }
+
+    public Item(String location, String price, String description, String shortDescription, String image, String contactNo, String userId, String itemId, String status) {
+        this.location = location;
+        this.price = price;
+        this.description = description;
+        this.shortDescription = shortDescription;
+        this.image = image;
+        this.contactNo = contactNo;
+        this.userId = userId;
+        this.itemId = itemId;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getItemId() {

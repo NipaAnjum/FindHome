@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.AssetDetailActivity">
+    tools:context=".pages.PendingItemDetailsActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,78 +14,79 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/aimageView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/home" />
+
+            <ImageView
+                android:id="@+id/pendingAimageView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/home" />
 
             <TextView
-                android:id="@+id/itemIdNo"
+                android:id="@+id/pendingItemIdNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/aimageView"
+                android:layout_below="@+id/pendingAimageView"
                 android:text="ITEM ID"
                 android:gravity="left"
                 android:textColor="#A5A4A4"
                 android:textSize="20sp"
                 android:textStyle="italic" />
 
-                <View
-                    android:id="@+id/div1"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_below="@+id/itemIdNo"
-                    android:background="@color/white" />
+            <View
+                android:id="@+id/div1"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_below="@+id/pendingItemIdNo"
+                android:background="@color/white" />
 
-                <TextView
-                    android:id="@+id/aprice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_below="@+id/div1"
-                    android:gravity="left"
-                    android:text="100000tk"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+            <TextView
+                android:id="@+id/pendingAprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/div1"
+                android:gravity="left"
+                android:text="100000tk"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-                <View
-                    android:id="@+id/div2"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_below="@+id/aprice"
-                    android:background="@color/white" />
+            <View
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_below="@+id/pendingAprice"
+                android:background="@color/white" />
 
-                <TextView
-                    android:id="@+id/alocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:layout_below="@+id/div2"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="Mirpur"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/pendingAlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_below="@+id/div2"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:text="Mirpur"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
 
             <View
                 android:id="@+id/div3"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_below="@+id/alocation"
+                android:layout_below="@+id/pendingAlocation"
                 android:background="@color/white" />
 
             <TextView
-                android:id="@+id/aphone"
+                android:id="@+id/pendingAphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -101,11 +102,11 @@
                 android:id="@+id/div4"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_below="@+id/aphone"
+                android:layout_below="@+id/pendingAphone"
                 android:background="@color/white" />
 
             <TextView
-                android:id="@+id/ashortDesc"
+                android:id="@+id/pendingAshortDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -120,11 +121,11 @@
                 android:id="@+id/div5"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_below="@+id/ashortDesc"
+                android:layout_below="@+id/pendingAshortDesc"
                 android:background="@color/white" />
 
             <TextView
-                android:id="@+id/adescription"
+                android:id="@+id/pendingAdescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/div5"
@@ -136,10 +137,10 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/deleteButton"
+                android:id="@+id/approved"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/adescription"
+                android:layout_below="@id/pendingAdescription"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="100dp"
@@ -150,18 +151,20 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/editButton"
+                android:id="@+id/refused"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginEnd="100dp"
                 android:layout_marginStart="100dp"
-                android:layout_below="@+id/deleteButton"
+                android:layout_below="@+id/approved"
                 android:backgroundTint="#4F65D3"
                 android:text="Edit"
                 android:textAlignment="center"/>
         </RelativeLayout>
+
+
 
 <!--        <LinearLayout-->
 <!--            android:orientation="vertical"-->
@@ -169,7 +172,7 @@
 <!--            android:layout_height="match_parent">-->
 
 <!--            <ImageView-->
-<!--                android:id="@+id/aimageView"-->
+<!--                android:id="@+id/pendingAimageView"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="250dp"-->
 <!--                android:scaleType="centerCrop"-->
@@ -177,8 +180,9 @@
 <!--                app:layout_constraintStart_toStartOf="parent"-->
 <!--                app:layout_constraintTop_toTopOf="parent"-->
 <!--                app:srcCompat="@drawable/home" />-->
+
 <!--            <TextView-->
-<!--                android:id="@+id/itemIdNo"-->
+<!--                android:id="@+id/pendingItemIdNo"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="30dp"-->
 <!--                android:layout_marginTop="8dp"-->
@@ -200,7 +204,7 @@
 
 <!--                <RelativeLayout-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp">-->
+<!--                    android:layout_height="wrap_content">-->
 
 <!--                    <TextView-->
 <!--                        android:id="@+id/labelPrice"-->
@@ -212,10 +216,11 @@
 <!--                        android:layout_marginTop="8dp"-->
 <!--                        android:text="Price:"-->
 <!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="20sp" />-->
+<!--                        android:textSize="20sp"-->
+<!--                        android:textStyle="italic" />-->
 
 <!--                    <TextView-->
-<!--                        android:id="@+id/aprice"-->
+<!--                        android:id="@+id/pendingAprice"-->
 <!--                        android:layout_width="100dp"-->
 <!--                        android:layout_height="41dp"-->
 <!--                        android:layout_alignParentRight="true"-->
@@ -232,14 +237,14 @@
 
 <!--                <View-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
+<!--                    android:layout_height="2dp"-->
 <!--                    android:layout_marginLeft="16dp"-->
 <!--                    android:layout_marginRight="16dp"-->
-<!--                    android:background="@color/white" />-->
+<!--                    android:background="@color/light_grey" />-->
 
 <!--                <RelativeLayout-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp">-->
+<!--                    android:layout_height="wrap_content">-->
 
 <!--                    <TextView-->
 <!--                        android:id="@+id/labelLocation"-->
@@ -249,10 +254,11 @@
 <!--                        android:text="Location:"-->
 <!--                        android:textColor="@color/black"-->
 <!--                        android:textSize="20sp"-->
+<!--                        android:textStyle="italic"-->
 <!--                        app:layout_constraintStart_toStartOf="parent" />-->
 
 <!--                    <TextView-->
-<!--                        android:id="@+id/alocation"-->
+<!--                        android:id="@+id/pendingAlocation"-->
 <!--                        android:layout_width="100dp"-->
 <!--                        android:layout_height="41dp"-->
 <!--                        android:layout_alignParentRight="true"-->
@@ -269,102 +275,79 @@
 
 <!--                <View-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
+<!--                    android:layout_height="2dp"-->
 <!--                    android:layout_marginLeft="16dp"-->
 <!--                    android:layout_marginRight="16dp"-->
-<!--                    android:background="@color/white" />-->
+<!--                    android:background="@color/light_grey" />-->
 
-<!--                <RelativeLayout-->
+<!--                <TextView-->
+<!--                    android:id="@+id/labelDescription"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="41dp"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:text="Description: "-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="italic"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/labelLocation" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/pendingAdescription"-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="150dp">-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginRight="8dp"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20sp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/labelDescription" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/labelDescription"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentStart="true"-->
-<!--                        android:layout_alignParentTop="true"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:paddingLeft="10dp"-->
-<!--                        android:text="Description:"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="20sp"-->
-<!--                        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/adescription"-->
-<!--                        android:layout_width="278dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_marginStart="2dp"-->
-<!--                        android:layout_marginEnd="3dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:layout_toEndOf="@+id/labelDescription"-->
-<!--                        android:gravity="left"-->
-<!--                        android:paddingLeft="16dp"-->
-<!--                        android:paddingRight="8dp"-->
-<!--                        android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="20sp"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/labelDescription" />-->
-<!--                </RelativeLayout>-->
 <!--                <View-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
+<!--                    android:layout_height="2dp"-->
 <!--                    android:layout_marginLeft="16dp"-->
 <!--                    android:layout_marginRight="16dp"-->
-<!--                    android:background="@color/white" />-->
+<!--                    android:background="@color/light_grey" />-->
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="150dp">-->
+<!--                <TextView-->
+<!--                    android:id="@+id/labelShortDesc"-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="41dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:text="Short Description: "-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="italic"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/description" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/labelShortDesc"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentStart="true"-->
-<!--                        android:layout_alignParentTop="true"-->
-<!--                        android:layout_marginStart="16dp"-->
-<!--                        android:layout_marginLeft="16dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Short Description: "-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="20sp"-->
-<!--                        app:layout_constraintStart_toStartOf="parent" />-->
+<!--                <TextView-->
+<!--                    android:id="@+id/pendingAshortDesc"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginRight="8dp"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20sp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/labelShortDesc" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/ashortDesc"-->
-<!--                        android:layout_width="229dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_alignParentTop="true"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_marginStart="1dp"-->
-<!--                        android:layout_marginLeft="16dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:layout_marginEnd="0dp"-->
-<!--                        android:layout_marginRight="8dp"-->
-<!--                        android:layout_toEndOf="@+id/labelShortDesc"-->
-<!--                        android:gravity="left"-->
-<!--                        android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="20sp"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/labelShortDesc" />-->
-<!--                </RelativeLayout>-->
 <!--                <View-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
+<!--                    android:layout_height="2dp"-->
 <!--                    android:layout_marginLeft="16dp"-->
 <!--                    android:layout_marginRight="16dp"-->
-<!--                    android:background="@color/white" />-->
+<!--                    android:background="@color/light_grey" />-->
 
 <!--                <RelativeLayout-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:background="@drawable/box_bg">-->
+<!--                    android:layout_height="wrap_content">-->
 
 <!--                    <TextView-->
 <!--                        android:id="@+id/labelPhone"-->
@@ -374,10 +357,11 @@
 <!--                        android:layout_marginTop="16dp"-->
 <!--                        android:text="Phone:"-->
 <!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="20sp"/>-->
+<!--                        android:textSize="20sp"-->
+<!--                        android:textStyle="italic" />-->
 
 <!--                    <TextView-->
-<!--                        android:id="@+id/aphone"-->
+<!--                        android:id="@+id/pendingAphone"-->
 <!--                        android:layout_width="150dp"-->
 <!--                        android:layout_height="41dp"-->
 <!--                        android:layout_alignParentRight="true"-->
@@ -400,28 +384,29 @@
 <!--                android:layout_gravity="center">-->
 
 <!--                <Button-->
-<!--                    android:id="@+id/deleteButton"-->
-<!--                    android:layout_width="80dp"-->
+<!--                    android:id="@+id/approved"-->
+<!--                    android:layout_width="100dp"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_marginStart="100dp"-->
+<!--                    android:layout_marginStart="90dp"-->
 <!--                    android:layout_marginEnd="150dp"-->
 <!--                    android:backgroundTint="#E62B47"-->
-<!--                    android:text="Delete"-->
+<!--                    android:text="Approve"-->
 <!--                    android:textAlignment="center"-->
 <!--                    android:textAllCaps="false" />-->
 
 <!--                <Button-->
-<!--                    android:id="@+id/editButton"-->
-<!--                    android:layout_width="80dp"-->
+<!--                    android:id="@+id/refused"-->
+<!--                    android:layout_width="100dp"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_marginEnd="100dp"-->
-<!--                    android:backgroundTint="#4F65D3"-->
-<!--                    android:text="Edit"-->
+<!--                    android:layout_marginEnd="90dp"-->
+<!--                    android:backgroundTint="#E62B47"-->
+<!--                    android:text="Refuse"-->
 <!--                    android:textAlignment="center"-->
 <!--                    android:textAllCaps="false" />-->
 <!--            </RelativeLayout>-->
 <!--        </LinearLayout>-->
     </ScrollView>
+
 </RelativeLayout>

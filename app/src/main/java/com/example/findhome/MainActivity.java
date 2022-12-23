@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.findhome.pages.AdminHomeActivity;
 import com.example.findhome.pages.HomeActivity;
 import com.example.findhome.pages.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +26,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(user!=null){
-                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                    finish();
+                    if(user.getEmail().equals("admin@gmail.com")){
+                        startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
+                        finish();
+                    }else {
+                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                        finish();
+                    }
                 }else{
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();

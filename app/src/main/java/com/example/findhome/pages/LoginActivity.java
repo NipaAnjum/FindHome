@@ -56,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(){
-        String email = userEmail.getText().toString();
-        String password = userPassword.getText().toString();
+        String email = userEmail.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
             userEmail.setError("Email cannot be empty");
@@ -66,16 +66,25 @@ public class LoginActivity extends AppCompatActivity {
             userPassword.setError("Password cannot be empty");
             userPassword.requestFocus();
         }else{
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        if(email.equalsIgnoreCase("admin@gmail.com") && password.equals("000000")){
+                            Toast.makeText(LoginActivity.this, "Admin Logged in", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
                     }else{
                         Toast.makeText(LoginActivity.this, "Log in Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:background="@color/dark_grey"
+        android:id="@+id/pending_asset_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <TextView
+            android:id="@+id/pendingAssetId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/pendingAssetLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pendingAssetId"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Location"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/pendingAssetSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pendingAssetLocation"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="4dp"
+            android:textSize="15sp"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentLeft="true"
+            android:text="Short description"
+            android:maxLength="20"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

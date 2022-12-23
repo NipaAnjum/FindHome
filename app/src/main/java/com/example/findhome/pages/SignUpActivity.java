@@ -33,6 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText userName, userEmail, userPassword, confirmPassword;
     private Button signUpButton;
     private DatabaseReference mRef;
+    private String imgUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,25 +60,30 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
         private void createUser(){
-            String name = userName.getText().toString();
-            String email = userEmail.getText().toString();
-            String password = userPassword.getText().toString();
-            String confirm_password = confirmPassword.getText().toString();
+            String name = userName.getText().toString().trim();
+            String email = userEmail.getText().toString().trim();
+            String password = userPassword.getText().toString().trim();
+            String confirm_password = confirmPassword.getText().toString().trim();
 
             if (TextUtils.isEmpty(email)){
                 userEmail.setError("Email cannot be empty");
                 userEmail.requestFocus();
+            }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                userEmail.setError("Enter valib email address");
+                userEmail.requestFocus();
             }else if (TextUtils.isEmpty(password)){
                 userPassword.setError("Password cannot be empty");
                 userPassword.requestFocus();
+            }else if(password.length()<6){
+                userPassword.setError("Minimum length of a password should be 6");
             }else if (TextUtils.isEmpty(confirm_password)){
                 userPassword.setError("Confirm your password");
                 userPassword.requestFocus();
             }else{
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        User user = new User(name,email);
+                        User user = new User(name,email,imgUrl);
                         if (task.isSuccessful()){
                             mRef.child("users").push().setValue(user);
                             Toast.makeText(SignUpActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();

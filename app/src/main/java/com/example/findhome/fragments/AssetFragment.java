@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.findhome.R;
@@ -71,16 +72,8 @@ public class AssetFragment extends Fragment implements AssetListener {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                            assetList.add(new Item(
-//                                    Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
-//                                    Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
-//                                    Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
-//                                    Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
-//                                    Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
-//                                    Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString(),
-//                                    Objects.requireNonNull(dataSnapshot.child("itemId").getValue()).toString()
-//                            ));
-                            assetList.add(dataSnapshot.getValue(Item.class));
+//                            Log.d("================", "Asset fragment "+ dataSnapshot);
+                            assetList.add(0,dataSnapshot.getValue(Item.class));
                         }
                         if(assetList.size()>0){
                             noItemMsg.setVisibility(View.GONE);
@@ -112,8 +105,9 @@ public class AssetFragment extends Fragment implements AssetListener {
         intent.putExtra("shortDescription",assetList.get(position).getShortDescription());
         intent.putExtra("image",assetList.get(position).getImage());
         intent.putExtra("itemId",assetList.get(position).getItemId());
+        intent.putExtra("status",assetList.get(position).getStatus());
 
-        Log.d("++++++++++++", "on asset position " + assetList.get(position).getItemId());
+//        Log.d("++++++++++++", "on asset position " + assetList.get(position).getItemId());
         startActivity(intent);
     }
 }

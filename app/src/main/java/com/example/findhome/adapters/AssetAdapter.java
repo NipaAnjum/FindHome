@@ -30,6 +30,8 @@ public class AssetAdapter extends RecyclerView.Adapter<AssetAdapter.ViewHolder> 
     private Context context;
     private List<Item> assetList;
     private AssetListener assetListener;
+    private ImageView approveIcon, refuseIcon, pendingIcon;
+    private String yes = "yes", no = "no", pending = "review";
 
     public AssetAdapter(Context context, List<Item> assetList, AssetListener assetListener) {
         this.context = context;
@@ -63,6 +65,19 @@ public class AssetAdapter extends RecyclerView.Adapter<AssetAdapter.ViewHolder> 
 
                     }
                 });
+        if(assetList.get(position).getStatus().equalsIgnoreCase(yes)){
+                    approveIcon.setVisibility(View.VISIBLE);
+                    pendingIcon.setVisibility(View.GONE);
+                    refuseIcon.setVisibility(View.GONE);
+        }else if(assetList.get(position).getStatus().equalsIgnoreCase(no)){
+                    approveIcon.setVisibility(View.GONE);
+                    pendingIcon.setVisibility(View.GONE);
+                    refuseIcon.setVisibility(View.VISIBLE);
+        }else if(assetList.get(position).getStatus().equalsIgnoreCase(pending)){
+                    approveIcon.setVisibility(View.GONE);
+                    pendingIcon.setVisibility(View.VISIBLE);
+                    refuseIcon.setVisibility(View.GONE);
+        }
 
     }
 
@@ -80,6 +95,9 @@ public class AssetAdapter extends RecyclerView.Adapter<AssetAdapter.ViewHolder> 
 
             assetLocation = itemView.findViewById(R.id.assetLocation);
             assetImage = itemView.findViewById(R.id.assetImage);
+            approveIcon = itemView.findViewById(R.id.approved);
+            refuseIcon = itemView.findViewById(R.id.refused);
+            pendingIcon = itemView.findViewById(R.id.pending);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

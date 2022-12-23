@@ -1,5 +1,6 @@
 package com.example.findhome.fragments;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,10 @@ import com.example.findhome.R;
 import com.example.findhome.adapters.HomeAdapter;
 import com.example.findhome.listeners.ItemListener;
 import com.example.findhome.model.Item;
-import com.example.findhome.model.User;
 import com.example.findhome.pages.DetailsActivity;
-import com.example.findhome.pages.HomeActivity;
 import com.example.findhome.pages.LoginActivity;
-import com.example.findhome.pages.SignUpActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,8 +53,11 @@ public class HomeFragment extends Fragment implements ItemListener {
     private List<Item> filterList;
     private CircleImageView profileImage;
     private TextView username;
-    private int searchFlag = 0;
+    private final int searchFlag = 0;
     private DatabaseReference ref;
+    private FirebaseUser currUser;
+    private String currUEmail;
+    private final String yes = "yes";
     private FirebaseAuth mFirebaseAuth;
 
     @Override
@@ -79,12 +80,11 @@ public class HomeFragment extends Fragment implements ItemListener {
                             public void onClick(DialogInterface dialog, int which) {
                                 mFirebaseAuth.getInstance().signOut();
                                 Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                                startActivity(intent);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                         | Intent.FLAG_ACTIVITY_CLEAR_TOP
                                         | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
-                                getActivity().finish();
+                                ((Activity) getActivity()).overridePendingTransition(0, 0);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -101,53 +101,35 @@ public class HomeFragment extends Fragment implements ItemListener {
         return v;
     }
 
-//    private void Logout(){
-//        mFirebaseAuth.signOut();
-//        getActivity().finish();
-//        startActivity(new Intent(getActivity(),LoginActivity.class));
-//        getActivity().finish();
-//    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         topDealRV = view.findViewById(R.id.top_deal_RV);
         profileImage = view.findViewById(R.id.profile_image);
-        username = view.findViewById(R.id.user_name);
+        username = view.findViewById(R.id.user_name_show);
         searchBar = view.findViewById(R.id.search);
 
+
         ref = FirebaseDatabase.getInstance().getReference().child("users");
-        ref.addChildEventListener(new ChildEventListener() {
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
+        currUEmail = currUser.getEmail();
+
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                User user = snapshot.getValue(User.class);
-                if(user != null){
-                    username.setText("Welcome " + user.getName());
-//                    userEmail.setText(user.getEmail());
-//                    id = snapshot.getKey();
-                    if(getContext()!=null)
-                    Glide.with(getContext())
-                            .load(user.getImage())
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    String e = ds.child("email").getValue().toString();
+                    if(e.equals(currUEmail)){
+                        username.setText("Welcome "+ds.child("name").getValue().toString());
+                        if(getContext()!=null)
+                        Glide.with(getContext())
+                            .load(ds.child("image").getValue())
                             .centerCrop()
                             .placeholder(R.drawable.ic_account)
                             .into(profileImage);
+                    }
                 }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
             }
 
             @Override
@@ -164,14 +146,18 @@ public class HomeFragment extends Fragment implements ItemListener {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            itemList.add(new Item(
-                                    Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
-                                    Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString()
-                            ));
+                            if(dataSnapshot.child("status").getValue().toString().equalsIgnoreCase(yes)){
+
+                                itemList.add(0,new Item(
+                                        Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
+                                        Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
+                                        Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
+                                        Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
+                                        Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
+                                        Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString(),
+                                        Objects.requireNonNull(dataSnapshot.child("status").getValue()).toString()
+                                ));
+                            }
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -187,6 +173,10 @@ public class HomeFragment extends Fragment implements ItemListener {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         topDealRV.setLayoutManager(linearLayoutManager);
         topDealRV.setAdapter(adapter);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.HORIZONTAL, false);
+//        topDealRV.setLayoutManager(gridLayoutManager);
+//        topDealRV.setHasFixedSize(true);
+//        topDealRV.setAdapter(adapter);
 
         //SEARCH
         searchBar.addTextChangedListener(new TextWatcher() {

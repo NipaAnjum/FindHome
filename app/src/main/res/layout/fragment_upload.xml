@@ -20,7 +20,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/edit_bg"
                 android:gravity="center"
                 android:hint="Enter location"
                 android:maxLength="30" />
@@ -33,7 +32,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/edit_bg"
                 android:gravity="center"
                 android:hint="Enter price"
                 android:inputType="number"
@@ -47,7 +45,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/edit_bg"
                 android:gravity="center"
                 android:hint="Enter description"
                 android:maxHeight="200dp"
@@ -66,7 +63,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/edit_bg"
                 android:gravity="center"
                 android:hint="Enter short description"
                 android:maxLength="30"
@@ -84,17 +80,15 @@
                 android:maxLength="11"
                 android:layout_below="@+id/give_short_description"
                 android:hint="Enter Contact Number"
-                android:inputType="number"
-                android:background="@drawable/edit_bg"/>
+                android:inputType="number"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/select_image_button"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/give_contactNo"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/edit_bg"
                 android:backgroundTint="@color/dark_orange"
                 android:gravity="center"
                 android:text="Select image"
@@ -105,29 +99,30 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_below="@+id/select_image_button"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="103dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="fitCenter"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="107dp"
                 android:padding="4dp"
-                android:background="@drawable/edit_bg"
+                android:scaleType="fitCenter"
                 android:src="@drawable/image"
-                android:visibility="gone"/>
+                android:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/make_upload"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_below="@+id/give_image"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="33dp"
-                android:layout_marginEnd="88dp"
-                android:text="Upload"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textAllCaps="false"
+                android:layout_marginStart="81dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="81dp"
                 android:backgroundTint="@color/dark_orange"
-                android:background="@drawable/edit_bg" />
-
+                android:text="Upload"
+                android:textSize="20sp"/>
 
         </RelativeLayout>
     </ScrollView>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,31 +16,33 @@ import com.example.findhome.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AssetDetailActivity extends AppCompatActivity {
+public class PendingItemDetailsActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView price, description, shortDescription, phoneNo, location, itemIdNumber;
     private String pri, des, shdes, img, phn, loc, ids, stats;
-    private String yes = "yes", no = "no", pending = "review";
-    private Button edit, delete;
-    private DatabaseReference ref;
+    private String yes = "yes", no = "no";
+    private Button approve, refuse;
+    private DatabaseReference refStat;
     private String itemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asset_detail);
+        setContentView(R.layout.activity_pending_item_details);
 
-        imageView = findViewById(R.id.aimageView);
-        price = findViewById(R.id.aprice);
-        location = findViewById(R.id.alocation);
-        description = findViewById(R.id.adescription);
-        shortDescription = findViewById(R.id.ashortDesc);
-        phoneNo = findViewById(R.id.aphone);
-        itemIdNumber = findViewById(R.id.itemIdNo);
+        imageView = findViewById(R.id.pendingAimageView);
+        price = findViewById(R.id.pendingAprice);
+        location = findViewById(R.id.pendingAlocation);
+        description = findViewById(R.id.pendingAdescription);
+        shortDescription = findViewById(R.id.pendingAshortDesc);
+        phoneNo = findViewById(R.id.pendingAphone);
+        itemIdNumber = findViewById(R.id.pendingItemIdNo);
 
-        edit = findViewById(R.id.editButton);
-        delete = findViewById(R.id.deleteButton);
+        refStat = FirebaseDatabase.getInstance().getReference().child("images");
+
+        approve = findViewById(R.id.approved);
+        refuse = findViewById(R.id.refused);
 
         pri = getIntent().getStringExtra("price");
         loc = getIntent().getStringExtra("location");
@@ -51,17 +52,6 @@ public class AssetDetailActivity extends AppCompatActivity {
         phn = getIntent().getStringExtra("contactNo");
         ids = getIntent().getStringExtra("itemId");
         stats = getIntent().getStringExtra("status");
-
-        if(stats.equalsIgnoreCase(yes) || stats.equalsIgnoreCase(no)) {
-            delete.setVisibility(View.VISIBLE);
-            edit.setVisibility(View.GONE);
-            edit.setEnabled(false);
-//            edit.setBackgroundColor(Color.GRAY);
-        }else if(stats.equalsIgnoreCase(pending)) {
-            delete.setVisibility(View.VISIBLE);
-            edit.setEnabled(true);
-            edit.setVisibility(View.VISIBLE);
-        }
 
         price.setText(pri+" tk");
         location.setText(loc);
@@ -75,21 +65,25 @@ public class AssetDetailActivity extends AppCompatActivity {
                 .placeholder(R.drawable.image)
                 .into(imageView);
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference("images").child(ids).removeValue();
-                Toast.makeText(AssetDetailActivity.this, "Selected item is deleted!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AssetDetailActivity.this, HomeActivity.class));
+                refStat.child(ids).child("status").setValue(yes);
+                approve.setVisibility(View.GONE);
+                refuse.setVisibility(View.GONE);
+                Toast.makeText(PendingItemDetailsActivity.this, "Selected item is approved!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PendingItemDetailsActivity.this, AdminHomeActivity.class));
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        refuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AssetDetailActivity.this, EditActivity.class);
-                intent.putExtra("itemID", ids);
-                startActivity(intent);
+                refStat.child(ids).child("status").setValue(no);
+                approve.setVisibility(View.GONE);
+                refuse.setVisibility(View.GONE);
+                Toast.makeText(PendingItemDetailsActivity.this, "Selected item is refused!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PendingItemDetailsActivity.this, AdminHomeActivity.class));
             }
         });
     }
