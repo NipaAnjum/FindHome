@@ -79,6 +79,7 @@ public class AssetDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("images").child(ids).removeValue();
+                FirebaseDatabase.getInstance().getReference("allImageDatabase").child(ids).removeValue();
                 Toast.makeText(AssetDetailActivity.this, "Selected item is deleted!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(AssetDetailActivity.this, HomeActivity.class));
             }

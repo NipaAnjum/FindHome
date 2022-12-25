@@ -38,7 +38,7 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <RelativeLayout
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
@@ -47,13 +47,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pendingList"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:footerDividersEnabled="false"
-                android:headerDividersEnabled="false"
                 android:divider="@color/white"
-                android:dividerHeight="8dp"/>
+                android:dividerHeight="8dp"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false" />
 
         </RelativeLayout>
     </ScrollView>

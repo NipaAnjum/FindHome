@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,6 +43,7 @@ public class EditActivity extends AppCompatActivity {
     private int Pick_Image = 1, clickCount = 0;
     private Uri uri;
     private String id, assetId;
+    private final String stats = "review";
     private String userID, imageOfTheAsset;
     private FirebaseUser currentUser;
     private long maxId;
@@ -198,6 +200,7 @@ public class EditActivity extends AppCompatActivity {
                                 map.put("userId", uid);
                             }
                             map.put("image", uri.toString());
+                            map.put("status", stats);
 
                             reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
                             reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -251,6 +254,7 @@ public class EditActivity extends AppCompatActivity {
                 map.put("userId", uid);
             }
             map.put("image", imageOfTheAsset);
+            map.put("status", stats);
             reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
             reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override

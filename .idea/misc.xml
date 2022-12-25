@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/approved.xml" value="0.141" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/bg_search.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/bottom_bg.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/box_bg.xml" value="0.132" />
@@ -14,16 +15,19 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/layout_bg.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/linear_bg.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/pending.xml" value="0.132" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/refuse.xml" value="0.141" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/text_view_box.xml" value="0.141" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/drawable/upload.xml" value="0.1505" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_admin_home.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_admin_page.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_asset_detail.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_details.xml" value="0.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_edit.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_details.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_edit.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_pending_item_details.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_pending_item_details.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_show_all_image.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/activity_sign_up.xml" value="0.18" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/asset_items.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/asset_list.xml" value="0.203125" />
@@ -37,9 +41,10 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/fragment_edit.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/fragment_favourite.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/fragment_upload.xml" value="0.18" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/fragment_upload.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/multiple_image_list.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/pending_items.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/single_image.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/layout/top_deals.xml" value="0.18" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FindHome/app/src/main/res/menu/bottom_menu.xml" value="0.22" />
       </map>

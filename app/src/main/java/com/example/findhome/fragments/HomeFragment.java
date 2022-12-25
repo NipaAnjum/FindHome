@@ -148,15 +148,18 @@ public class HomeFragment extends Fragment implements ItemListener {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if(dataSnapshot.child("status").getValue().toString().equalsIgnoreCase(yes)){
 
-                                itemList.add(0,new Item(
-                                        Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
-                                        Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
-                                        Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
-                                        Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
-                                        Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
-                                        Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString(),
-                                        Objects.requireNonNull(dataSnapshot.child("status").getValue()).toString()
-                                ));
+
+                                itemList.add(0,dataSnapshot.getValue(Item.class));
+//                                itemList.add(0,new Item(
+//                                        Objects.requireNonNull(dataSnapshot.child("location").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("description").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("shortDescription").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("contactNo").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("itemId").getValue()).toString(),
+//                                        Objects.requireNonNull(dataSnapshot.child("status").getValue()).toString()
+//                                ));
                             }
                         }
                         adapter.notifyDataSetChanged();
@@ -169,14 +172,14 @@ public class HomeFragment extends Fragment implements ItemListener {
                 });
 
         adapter = new HomeAdapter(getContext(), itemList, this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        topDealRV.setLayoutManager(linearLayoutManager);
-        topDealRV.setAdapter(adapter);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.HORIZONTAL, false);
-//        topDealRV.setLayoutManager(gridLayoutManager);
-//        topDealRV.setHasFixedSize(true);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        topDealRV.setLayoutManager(linearLayoutManager);
 //        topDealRV.setAdapter(adapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL, false);
+        topDealRV.setLayoutManager(gridLayoutManager);
+        topDealRV.setHasFixedSize(true);
+        topDealRV.setAdapter(adapter);
 
         //SEARCH
         searchBar.addTextChangedListener(new TextWatcher() {
@@ -207,9 +210,9 @@ public class HomeFragment extends Fragment implements ItemListener {
 
     private void noFilter() {
         adapter = new HomeAdapter(getContext(), itemList, this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        topDealRV.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL, false);
+        topDealRV.setLayoutManager(gridLayoutManager);
+        topDealRV.setHasFixedSize(true);
         topDealRV.setAdapter(adapter);
     }
 
@@ -220,9 +223,9 @@ public class HomeFragment extends Fragment implements ItemListener {
             }
         }
         adapter = new HomeAdapter(getContext(), filterList, this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        topDealRV.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL, false);
+        topDealRV.setLayoutManager(gridLayoutManager);
+        topDealRV.setHasFixedSize(true);
         topDealRV.setAdapter(adapter);
     }
 
@@ -236,6 +239,8 @@ public class HomeFragment extends Fragment implements ItemListener {
         intent.putExtra("description",itemList.get(position).getDescription());
         intent.putExtra("shortDescription",itemList.get(position).getShortDescription());
         intent.putExtra("image",itemList.get(position).getImage());
+        intent.putExtra("itemId",itemList.get(position).getItemId());
+//        Log.d("=================", "============= OnItemPosition: " + itemList.get(position).getItemId());
         startActivity(intent);
     }
 }

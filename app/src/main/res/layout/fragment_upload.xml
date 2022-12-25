@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.UploadFragment">
 
     <ScrollView
@@ -13,80 +14,134 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/give_location"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="16dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti1"
+                style="@style/textInputEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:hint="Enter location"
-                android:maxLength="30" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                app:hintEnabled="false">
 
-            <EditText
-                android:id="@+id/give_price"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/give_location"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
-                android:hint="Enter price"
-                android:inputType="number"
-                android:maxLength="9" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/give_location"
+                    android:layout_width="350dp"
+                    android:textCursorDrawable="@color/dark_orange"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:hint="Location"
+                    android:maxLength="30" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/give_description"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@+id/give_price"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="16dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti2"
+                style="@style/textInputEditText"
+                android:layout_below="@+id/ti1"
                 android:gravity="center"
-                android:hint="Enter description"
-                android:maxHeight="200dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical" />
+                android:layout_width="350dp"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                app:hintEnabled="false">
 
-            <EditText
-                android:id="@+id/give_short_description"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/give_description"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
-                android:hint="Enter short description"
-                android:maxLength="30"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/give_price"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@color/dark_orange"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:hint="Price"
+                    android:inputType="number"
+                    android:maxLength="9" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/give_contactNo"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti3"
+                style="@style/textInputEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ti2"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:maxLength="11"
-                android:layout_below="@+id/give_short_description"
-                android:hint="Enter Contact Number"
-                android:inputType="number"/>
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/give_contactNo"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@color/dark_orange"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:hint="Contact No"
+                    android:maxLength="11"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti4"
+                android:gravity="center"
+                style="@style/textInputEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ti3"
+                android:layout_marginBottom="8dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/give_description"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@color/dark_orange"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:hint="Description"
+                    android:maxLength="300"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="insideInset"
+                    android:maxHeight="200dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti5"
+                android:gravity="center"
+                style="@style/textInputEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ti4"
+                app:hintEnabled="false"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/give_short_description"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@color/dark_orange"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:hint="Short Description"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/select_image_button"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/give_contactNo"
+                android:layout_below="@+id/ti5"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/dark_orange"
@@ -101,14 +156,11 @@
                 android:layout_below="@+id/select_image_button"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="103dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="107dp"
+                android:foregroundGravity="center"
                 android:padding="4dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/image"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/make_upload"
@@ -122,7 +174,7 @@
                 android:layout_marginEnd="81dp"
                 android:backgroundTint="@color/dark_orange"
                 android:text="Upload"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </RelativeLayout>
     </ScrollView>

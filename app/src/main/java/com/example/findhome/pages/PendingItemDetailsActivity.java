@@ -69,8 +69,6 @@ public class PendingItemDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 refStat.child(ids).child("status").setValue(yes);
-                approve.setVisibility(View.GONE);
-                refuse.setVisibility(View.GONE);
                 Toast.makeText(PendingItemDetailsActivity.this, "Selected item is approved!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PendingItemDetailsActivity.this, AdminHomeActivity.class));
             }
@@ -80,8 +78,6 @@ public class PendingItemDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 refStat.child(ids).child("status").setValue(no);
-                approve.setVisibility(View.GONE);
-                refuse.setVisibility(View.GONE);
                 Toast.makeText(PendingItemDetailsActivity.this, "Selected item is refused!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PendingItemDetailsActivity.this, AdminHomeActivity.class));
             }

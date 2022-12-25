@@ -16,9 +16,9 @@ import com.example.findhome.R;
 public class DetailsActivity extends AppCompatActivity {
 
     private ImageView imageView;
-    private TextView price, description, shortDescription, phoneNo;
+    private TextView price, description, shortDescription, phoneNo, more;
     private Button makeCall;
-    String pri, des, shdes, img, phn;
+    String pri, des, shdes, img, phn, itemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +31,16 @@ public class DetailsActivity extends AppCompatActivity {
         shortDescription = findViewById(R.id.short_description);
         makeCall = findViewById(R.id.make_call);
         phoneNo = findViewById(R.id.phone_no);
+        more = findViewById(R.id.moreImages);
 
         pri = getIntent().getStringExtra("price");
         des = getIntent().getStringExtra("description");
         shdes = getIntent().getStringExtra("shortDescription");
         img = getIntent().getStringExtra("image");
         phn = getIntent().getStringExtra("contactNo");
+        itemId = getIntent().getStringExtra("itemId");
 
-//        Log.d(img, "Image");
+//        Log.d("==================", "item id ============ " + itemId);
         
         price.setText(pri+"tk");
         description.setText(des);
@@ -56,6 +58,15 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:"+phn));
+                startActivity(intent);
+            }
+        });
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailsActivity.this, ShowAllImageActivity.class);
+                intent.putExtra("itemId", itemId);
                 startActivity(intent);
             }
         });

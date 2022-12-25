@@ -95,38 +95,4 @@ public class AdminPendingItemAdapter extends RecyclerView.Adapter<AdminPendingIt
             });
         }
     }
-
-//    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        View listItemView = convertView;
-//        if(listItemView == null){
-//            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.pending_items, parent, false);
-//        }
-
-//        Item items = getItem(position);
-//
-//        TextView pendingItemLocation = listItemView.findViewById(R.id.pendingAssetLocation);
-//        TextView pendingItemSD = listItemView.findViewById(R.id.pendingAssetSD);
-//        TextView pendingItemId = listItemView.findViewById(R.id.pendingAssetId);
-//        RelativeLayout relativeLayoutBG = listItemView.findViewById(R.id.pending_asset_relative_layout);
-//
-//        pendingItemLocation.setText(items.getLocation());
-//        pendingItemSD.setText(items.getShortDescription());
-//        pendingItemId.setText(items.getItemId());
-//
-//        if (items.getStatus() == "yes"){
-//            relativeLayoutBG.setBackgroundResource(R.color.white);
-//        }else if(items.getStatus() == "no"){
-//            relativeLayoutBG.setBackgroundResource(R.color.red);
-//        }
-//
-//        listItemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getContext().startActivity(new Intent(getContext(), PendingItemDetailsActivity.class));
-//            }
-//        });
-//        return listItemView;
-//    }
 }

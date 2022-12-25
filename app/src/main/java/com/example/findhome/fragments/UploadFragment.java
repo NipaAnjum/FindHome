@@ -26,6 +26,7 @@ import com.example.findhome.R;
 import com.example.findhome.pages.HomeActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -41,7 +43,7 @@ import java.util.UUID;
 public class UploadFragment extends Fragment {
 
     private ImageView itemImage;
-    private EditText location, price, description, shortDescription, contact;
+    private TextInputEditText location, price, description, shortDescription, contact;
     private AppCompatButton upload_button, select_button;
     private int Pick_Image = 1;
     private int clickCount = 0;
@@ -51,6 +53,9 @@ public class UploadFragment extends Fragment {
     private DatabaseReference ref, userDB;
     private DatabaseReference reference, root;
     private boolean updatePerformed = false;
+    private ArrayList<Uri> imageList;
+    private Uri imageUri;
+    private int upload_count = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,17 +77,31 @@ public class UploadFragment extends Fragment {
         select_button = view.findViewById(R.id.select_image_button);
         upload_button = view.findViewById(R.id.make_upload);
 
+        imageList = new ArrayList<>();
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
             userID = currentUser.getUid();
         }
 
         root = FirebaseDatabase.getInstance().getReference().child("images");
+        id = root.push().getKey();
+//        select_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Selected Picture"), Pick_Image);
+//            }
+//        });
+
         select_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Selected Picture"), Pick_Image);
             }
@@ -106,72 +125,169 @@ public class UploadFragment extends Fragment {
         });
     }
 
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == Pick_Image && resultCode == RESULT_OK){
+//            assert data != null;
+//            if(data.getData() != null){
+//                uri = data.getData();
+//                itemImage.setImageURI(uri);
+//                itemImage.setVisibility(View.VISIBLE);
+//            }
+//        }
+//    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == Pick_Image && resultCode == RESULT_OK){
-            assert data != null;
-            if(data.getData() != null){
-                uri = data.getData();
+            if(data.getClipData() != null){
+                int countClipData = data.getClipData().getItemCount();
+                int currentImageSelect = 0;
+                uri = data.getClipData().getItemAt(currentImageSelect).getUri();
                 itemImage.setImageURI(uri);
                 itemImage.setVisibility(View.VISIBLE);
+                while(currentImageSelect<countClipData){
+                    imageUri = data.getClipData().getItemAt(currentImageSelect).getUri();
+                    imageList.add(imageUri);
+                    currentImageSelect += 1;
+                }
             }
         }
     }
 
-    private void uploadItem() {
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/"+ UUID.randomUUID().toString());
-        ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-              @Override
-              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//    private void uploadItem() {
+//        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/"+ UUID.randomUUID().toString());
+//        ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//              @Override
+//              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        updatePerformed = true;
+//                        Log.d("URL", "onSuccess: "+uri);
+//
+//                        id = root.push().getKey();
+////                        Log.d("------------------", "item is in upload fragment " + id);
+//
+//                        Map<String,String> map = new HashMap<>();
+//
+//
+//                            map.put("location", location.getText().toString());
+//                            map.put("price", price.getText().toString());
+//                            map.put("description", description.getText().toString());
+//                            map.put("shortDescription", shortDescription.getText().toString());
+//                            map.put("contactNo", contact.getText().toString());
+//                            map.put("userId", userID);
+//                            map.put("itemId",id);
+//                            map.put("image",uri.toString());
+//                            map.put("status", assetStatus);
+//
+//                        reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
+//                        reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+////                                Fragment fragment = new AssetFragment();
+////                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+////                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+////                                fragmentTransaction.replace(R.id.fragment_container, fragment);
+////                                fragmentTransaction.addToBackStack(null);
+////                                fragmentTransaction.commit();
+//
+//                                Toast.makeText(getContext(), "New Item Uploaded", Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(getActivity(), HomeActivity.class));
+//                                ((Activity) getActivity()).overridePendingTransition(0,0);
+//
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Toast.makeText(getContext(), "Failed to Upload New Item", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
+//    }
+private void uploadItem() {
+
+    StorageReference imageFolder = FirebaseStorage.getInstance().getReference();
+    Uri oneImage = imageList.get(0);
+    StorageReference singleImageName = imageFolder.child("images/" + oneImage.getLastPathSegment());
+    singleImageName.putFile(oneImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        @Override
+        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            singleImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+//                    id = root.push().getKey();
+                    Map<String,String> map = new HashMap<>();
+                    map.put("location", location.getText().toString());
+                    map.put("price", price.getText().toString());
+                    map.put("description", description.getText().toString());
+                    map.put("shortDescription", shortDescription.getText().toString());
+                    map.put("contactNo", contact.getText().toString());
+                    map.put("userId", userID);
+                    map.put("itemId",id);
+                    map.put("image",uri.toString());
+                    map.put("status", assetStatus);
+
+                    reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
+                    reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
+                            ((Activity) getActivity()).overridePendingTransition(0,0);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), "Failed to Upload New Item", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    imageList.clear();
+                }
+            });
+        }
+    });
+
+    for (upload_count = 0; upload_count < imageList.size(); upload_count++) {
+        Uri individualImage = imageList.get(upload_count);
+        StorageReference imageName = imageFolder.child("images/" + individualImage.getLastPathSegment());
+
+        imageName.putFile(individualImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        updatePerformed = true;
-                        Log.d("URL", "onSuccess: "+uri);
+                        String url = String.valueOf(uri);
+                        Map<String, String> hashMap = new HashMap<>();
+                        hashMap.put("link", url);
 
-                        id = root.push().getKey();
-//                        Log.d("------------------", "item is in upload fragment " + id);
-
-                        Map<String,String> map = new HashMap<>();
-
-
-                            map.put("location", location.getText().toString());
-                            map.put("price", price.getText().toString());
-                            map.put("description", description.getText().toString());
-                            map.put("shortDescription", shortDescription.getText().toString());
-                            map.put("contactNo", contact.getText().toString());
-                            map.put("userId", userID);
-                            map.put("itemId",id);
-                            map.put("image",uri.toString());
-                            map.put("status", assetStatus);
-
-                        reference = FirebaseDatabase.getInstance().getReference().child("images").child(id);
-                        reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        reference = FirebaseDatabase.getInstance().getReference().child("allImageDatabase").child(id);
+                        reference.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-//                                Fragment fragment = new AssetFragment();
-//                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                fragmentTransaction.replace(R.id.fragment_container, fragment);
-//                                fragmentTransaction.addToBackStack(null);
-//                                fragmentTransaction.commit();
-
-                                Toast.makeText(getContext(), "New Item Uploaded", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getActivity(), HomeActivity.class));
-                                ((Activity) getActivity()).overridePendingTransition(0,0);
-
+//                                Toast.makeText(getContext(), "Upload Successful", Toast.LENGTH_SHORT).show();
+                                Log.d("==============", "============IMAGE DATABASE UPLOAD SUCCESSFUL============ ");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Failed to Upload New Item", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Failed to Upload", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        imageList.clear();
                     }
                 });
             }
         });
+    }
     }
 }

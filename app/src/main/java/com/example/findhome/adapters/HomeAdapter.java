@@ -2,6 +2,7 @@ package com.example.findhome.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.price.setText(itemList.get(position).getPrice());
+//        Log.d("==========", "===========home adapter: "+ itemList.get(position).getImage());
+
+        holder.price.setText(itemList.get(position).getPrice()+" Tk");
         holder.location.setText(itemList.get(position).getLocation());
         holder.shortDescription.setText(itemList.get(position).getShortDescription());
         Glide.with(context)
