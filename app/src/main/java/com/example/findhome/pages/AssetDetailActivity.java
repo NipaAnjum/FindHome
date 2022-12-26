@@ -63,11 +63,11 @@ public class AssetDetailActivity extends AppCompatActivity {
             edit.setVisibility(View.VISIBLE);
         }
 
-        price.setText(pri+" tk");
-        location.setText(loc);
-        description.setText(des);
+        price.setText("Price: "+pri+" tk");
+        location.setText("Location: "+loc);
+        description.setText("Description: "+des);
         shortDescription.setText(shdes);
-        phoneNo.setText(phn);
+        phoneNo.setText("Phone No:" +phn);
         itemIdNumber.setText(ids);
         Glide.with(this)
                 .load(img)

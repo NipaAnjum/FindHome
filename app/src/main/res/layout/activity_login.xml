@@ -108,6 +108,16 @@
                 android:textAlignment="center"
                 android:textStyle="italic"/>
 
+                <TextView
+                    android:id="@+id/forgetPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Have you forgot yout password?"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"/>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

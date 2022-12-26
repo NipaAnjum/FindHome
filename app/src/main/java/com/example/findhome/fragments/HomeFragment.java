@@ -218,7 +218,7 @@ public class HomeFragment extends Fragment implements ItemListener {
 
     private void filter(String text) {
         for( Item item:itemList){
-            if(item.getLocation().toLowerCase().contains(text.toLowerCase())){
+            if(item.getLocation().toLowerCase().contains(text.toLowerCase()) || item.getShortDescription().toLowerCase().contains(text.toLowerCase())){
                 filterList.add(item);
             }
         }

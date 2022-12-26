@@ -6,7 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".pages.AssetDetailActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailstoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/light_grey"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Asset Details"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+
     <ScrollView
+        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -103,8 +117,7 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/text_view_box"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="italic" />
+                android:textSize="20sp" />
 
             <View
                 android:id="@+id/div4"
@@ -123,9 +136,9 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/text_view_box"
                 android:gravity="left"
-                android:padding="8dp"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:padding="8dp"
                 android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -146,11 +159,11 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/text_view_box"
                 android:gravity="left"
-                android:scrollbars="vertical"
-                android:scrollbarStyle="insideInset"
                 android:maxHeight="200dp"
-                android:maxLength="300"
+                android:maxLength="500"
                 android:padding="8dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
                 android:text="Placeholder The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."
                 android:textColor="@color/black"
                 android:textSize="20sp" />

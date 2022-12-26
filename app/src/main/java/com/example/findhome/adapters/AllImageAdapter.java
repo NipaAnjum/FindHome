@@ -39,7 +39,7 @@ public class AllImageAdapter extends RecyclerView.Adapter<AllImageAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull AllImageAdapter.ViewHolder holder, int position) {
 
-        Log.d("==========", "===========onBindViewHolder: "+ imageArrayList.get(position).getImageUrl());
+//        Log.d("==========", "===========onBindViewHolder: "+ imageArrayList.get(position).getImageUrl());
 
         Glide.with(context)
                 .load(imageArrayList.get(position).getImageUrl())

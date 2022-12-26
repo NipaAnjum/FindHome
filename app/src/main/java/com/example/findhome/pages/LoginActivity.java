@@ -19,16 +19,18 @@ import com.example.findhome.MainActivity;
 import com.example.findhome.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView createAccount;
+    private TextView createAccount, forgetPassword;
     private EditText userEmail, userPassword;
     private Button loginButton;
     private FirebaseAuth mAuth;
+    private String inputEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.user_email);
         userPassword = findViewById(R.id.user_password);
         loginButton = findViewById(R.id.login_button);
+        forgetPassword = findViewById(R.id.forgetPassword);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +55,33 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(view -> {
             loginUser();
+        });
+
+        forgetPassword.setOnClickListener(view ->{
+            validateData();
+        });
+    }
+
+    private void validateData() {
+        inputEmail = userEmail.getText().toString().trim();
+        if(inputEmail.isEmpty()){
+            userEmail.setError("Email cannot be empty");
+            userEmail.requestFocus();
+        }else{
+            resetPassword();
+        }
+    }
+
+    private void resetPassword() {
+        mAuth.sendPasswordResetEmail(inputEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Check Your Email", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(LoginActivity.this, "Error: "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 

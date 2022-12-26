@@ -2,6 +2,7 @@ package com.example.findhome.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.findhome.R;
 import com.example.findhome.model.User;
+import com.example.findhome.pages.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -51,7 +53,7 @@ public class AccountFragment extends Fragment {
     private AppCompatButton updateButton;
     private int Pick_Image = 1, clickCount = 0;
     private Uri uri;
-    private String id, userImage;
+    private String id, userImage="";
     private long maxId;
     private DatabaseReference ref;
     private DatabaseReference reference;
@@ -105,45 +107,6 @@ public class AccountFragment extends Fragment {
 
             }
         });
-
-//        ref.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                User user = snapshot.getValue(User.class);
-//                if(user != null){
-//                    userImage = user.getImage();
-//                    id =  snapshot.getKey();
-//                    userName.setText(user.getName());
-//                    userEmail.setText(user.getEmail());
-//                    Glide.with(getContext())
-//                            .load(user.getImage())
-//                            .centerCrop()
-//                            .placeholder(R.drawable.ic_account)
-//                            .into(userProfile);
-//                }
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,10 +170,6 @@ public class AccountFragment extends Fragment {
                             if (uri != null) {
                                 map.put("image", uri.toString());
                             }
-//                        else{
-//                            String i = u.getImage();
-//                            map.put("image", i);
-//                        }
 
                             reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);
                             reference.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -222,9 +181,13 @@ public class AccountFragment extends Fragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isComplete()) {
-                                                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(getActivity(), HomeActivity.class));
+                                                        ((Activity) getActivity()).overridePendingTransition(0, 0);
                                                     } else {
                                                         Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(getActivity(), HomeActivity.class));
+                                                        ((Activity) getActivity()).overridePendingTransition(0, 0);
                                                     }
                                                 }
                                             });
@@ -248,7 +211,7 @@ public class AccountFragment extends Fragment {
                 map.put("email", e);
             } else map.put("email", userEmail.getText().toString());
 
-            userImage = u.getImage();
+//            userImage = u.getImage();
             map.put("image", userImage);
 
             reference = FirebaseDatabase.getInstance().getReference().child("users").child(id);
@@ -261,9 +224,13 @@ public class AccountFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isComplete()) {
-                                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getActivity(), HomeActivity.class));
+                                        ((Activity) getActivity()).overridePendingTransition(0, 0);
                                     } else {
                                         Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getActivity(), HomeActivity.class));
+                                        ((Activity) getActivity()).overridePendingTransition(0, 0);
                                     }
                                 }
                             });

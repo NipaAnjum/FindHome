@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_search"
             android:padding="16dp"
-            android:hint="Search by location..."
+            android:hint="Search Here..."
             android:drawableStart="@drawable/ic_search"/>
 
     </LinearLayout>

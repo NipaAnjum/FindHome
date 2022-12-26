@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".pages.PendingItemDetailsActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/pendingitemtoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/light_grey"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Pending Post Details"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +28,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:layout_marginTop="75dp"
                 android:id="@+id/pendingAimageView"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"

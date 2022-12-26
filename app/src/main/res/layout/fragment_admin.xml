@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AdminFragment"
+    android:background="#E4E4DE"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/pendingTitle"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/uploadToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Pending Items"
-        android:textColor="@color/purple_500"
-        android:textSize="30sp"
-        android:textStyle="italic" />
+        android:layout_height="70dp"
+        android:background="@color/light_grey"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Pending Items"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/logOutAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="273dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/button_bg"
-        android:text="Log out"
-        android:textStyle="bold"/>
-    </RelativeLayout>
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:backgroundTint="#2FD5B4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_anchorGravity="bottom|right|end"/>
 
     <ScrollView
+        android:layout_marginTop="80dp"
+        android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadToolbar">
+
         <RelativeLayout
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pendingList"
@@ -57,4 +62,4 @@
 
         </RelativeLayout>
     </ScrollView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

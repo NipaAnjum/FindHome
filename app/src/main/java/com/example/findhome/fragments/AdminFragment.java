@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,8 @@ import com.example.findhome.pages.AdminHomeActivity;
 import com.example.findhome.pages.AssetDetailActivity;
 import com.example.findhome.pages.LoginActivity;
 import com.example.findhome.pages.PendingItemDetailsActivity;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +44,7 @@ import java.util.List;
 
 public class AdminFragment extends Fragment implements PendingItemListener {
 
-    private Button logOut;
+    private ExtendedFloatingActionButton logOut;
     private RecyclerView pendingListView;
     private FirebaseAuth mFirebaseAuth;
     private AdminPendingItemAdapter mPendingItemAdapter;

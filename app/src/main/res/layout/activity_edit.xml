@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#E4E4DE"
     tools:context=".pages.EditActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/editToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/light_grey"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Edit Info"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+    <ScrollView
+        android:layout_marginTop="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -13,27 +31,12 @@
 
             <ImageView
                 android:id="@+id/edit_asset_image"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_width="380dp"
+                android:layout_height="300dp"
                 android:src="@drawable/image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-<!--            <TextView-->
-<!--                android:id="@+id/textView"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:text="Change photo"-->
-<!--                android:textColor="#FF3714"-->
-<!--                android:textFontWeight="50"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="italic"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.087"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti1"
@@ -162,7 +165,7 @@
                     android:scrollbarStyle="insideInset"
                     android:layout_marginEnd="40dp"
                     android:hint="Description"
-                    android:maxLength="300" />
+                    android:maxLength="500" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -178,53 +181,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/ti5"
                 app:layout_constraintStart_toStartOf="@+id/ti5"
                 app:layout_constraintTop_toBottomOf="@+id/ti5" />
-
-<!--            <EditText-->
-<!--                android:id="@+id/edit_description"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/edit_location"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/edit_location"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/edit_location"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:maxHeight="200dp"-->
-<!--                android:paddingLeft="16dp"-->
-<!--                android:paddingTop="8dp"-->
-<!--                android:paddingRight="16dp"-->
-<!--                android:paddingBottom="8dp"-->
-<!--                android:scrollbarStyle="insideInset"-->
-<!--                android:scrollbars="vertical"-->
-<!--                android:layout_margin="16dp"-->
-<!--                android:hint="Description"-->
-<!--                android:padding="16dp"-->
-<!--                tools:layout_editor_absoluteX="16dp"-->
-<!--                tools:layout_editor_absoluteY="190dp" />-->
-<!--    <EditText-->
-<!--        android:id="@+id/edit_short_description"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/edit_description"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/edit_description"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/edit_description"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="16dp"-->
-<!--        android:hint="Short Description"-->
-<!--        android:maxLength="30"-->
-<!--        android:padding="16dp"-->
-<!--        tools:layout_editor_absoluteX="16dp"-->
-<!--        tools:layout_editor_absoluteY="190dp" />-->
-<!--    <EditText-->
-<!--        android:id="@+id/edit_phone_no"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/edit_short_description"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/edit_short_description"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/edit_short_description"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="16dp"-->
-<!--        android:maxLength="11"-->
-<!--        android:inputType="number"-->
-<!--        android:hint="Phone Number"-->
-<!--        android:padding="16dp"-->
-<!--        tools:layout_editor_absoluteX="16dp"-->
-<!--        tools:layout_editor_absoluteY="190dp" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    </ScrollView>
+
+</RelativeLayout>

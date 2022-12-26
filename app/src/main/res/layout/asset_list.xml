@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_height="70dp"
+    android:layout_marginBottom="10dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
+    android:background="@drawable/text_view_box"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:id="@+id/asset_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_grey"
-        android:padding="2dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/assetImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@+id/linearL"
+            android:scaleType="fitStart"
             android:src="@drawable/image" />
 
         <TextView
@@ -27,54 +32,68 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/assetImage"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_toEndOf="@+id/assetImage"
             android:gravity="left"
             android:text="Location"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
+        <LinearLayout
+            android:id="@+id/linearL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/pending"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/pending"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/approved"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/approved"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
             android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/refused"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/refuse"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
             android:visibility="gone"/>
-
-<!--        <Button-->
-<!--            android:id="@+id/itemDelete"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_marginRight="16dp"-->
-<!--            android:backgroundTint="@color/dark_orange"-->
-<!--            android:text="Delete"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:layout_marginEnd="10dp"/>-->
+        </LinearLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

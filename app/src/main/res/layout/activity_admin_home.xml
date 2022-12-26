@@ -14,44 +14,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/pendingTitle"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="16dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginRight="16dp"-->
-<!--        android:text="Pending Items"-->
-<!--        android:textColor="@color/purple_500"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textStyle="italic" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/logOutAdmin"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginStart="273dp"-->
-<!--        android:layout_marginTop="11dp"-->
-<!--        android:layout_marginEnd="18dp"-->
-<!--        android:background="@drawable/button_bg"-->
-<!--        android:text="Log out"-->
-<!--        android:textStyle="bold"/>-->
-
-<!--    <ListView-->
-<!--        android:id="@+id/pendingList"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/pendingTitle"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginLeft="8dp"-->
-<!--        android:layout_marginRight="8dp"-->
-<!--        android:footerDividersEnabled="false"-->
-<!--        android:headerDividersEnabled="false"-->
-<!--        android:divider="@color/white"-->
-<!--        android:dividerHeight="8dp"/>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

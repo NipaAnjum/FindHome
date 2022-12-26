@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.findhome.R;
 import com.example.findhome.adapters.AssetAdapter;
 import com.example.findhome.listeners.AssetListener;
@@ -39,6 +40,7 @@ public class AssetFragment extends Fragment implements AssetListener {
     private TextView noItemMsg;
     private List<Item> assetList;
     private AssetAdapter mAssetAdapter;
+    private LottieAnimationView emptyView;
     private String currentUser;
     private DatabaseReference ref;
     private FirebaseAuth mFirebaseAuth;
@@ -57,6 +59,7 @@ public class AssetFragment extends Fragment implements AssetListener {
 
         assetRV = view.findViewById(R.id.your_asset_RV);
         noItemMsg = view.findViewById(R.id.noItemMsg);
+        emptyView = view.findViewById(R.id.emptyAnimation);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -76,11 +79,13 @@ public class AssetFragment extends Fragment implements AssetListener {
                             assetList.add(0,dataSnapshot.getValue(Item.class));
                         }
                         if(assetList.size()>0){
+                            emptyView.setVisibility(View.GONE);
                             noItemMsg.setVisibility(View.GONE);
                             assetRV.setVisibility(View.VISIBLE);
 
                         }
                         else{
+                            emptyView.setVisibility(View.VISIBLE  );
                             noItemMsg.setVisibility(View.VISIBLE);
                             assetRV.setVisibility(View.GONE);
                         }

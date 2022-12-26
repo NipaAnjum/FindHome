@@ -6,9 +6,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.UploadFragment">
 
-    <ScrollView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/uploadToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="70dp"
+        android:background="@color/light_grey"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:title="Upload New Item"
+        android:elevation="10dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/uploadToolbar"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#E4E4DE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,7 +57,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
                     android:hint="Location"
-                    android:maxLength="30" />
+                    android:maxLength="100" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,8 +127,8 @@
                     android:textCursorDrawable="@color/dark_orange"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
-                    android:hint="Description"
-                    android:maxLength="300"
+                    android:hint="Description (Property and location details)"
+                    android:maxLength="500"
                     android:scrollbars="vertical"
                     android:scrollbarStyle="insideInset"
                     android:maxHeight="200dp"/>
@@ -130,7 +152,7 @@
                     android:textCursorDrawable="@color/dark_orange"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
-                    android:hint="Short Description"
+                    android:hint="Short Description (House/Room/Flat)"
                     android:maxLength="30"
                     android:maxLines="1"
                     android:scrollbarStyle="insideInset"
@@ -142,7 +164,8 @@
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_below="@+id/ti5"
-                android:layout_marginLeft="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/dark_orange"
                 android:gravity="center"
@@ -177,6 +200,7 @@
                 android:textSize="20sp" />
 
         </RelativeLayout>
-    </ScrollView>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
